@@ -1,0 +1,22 @@
+{
+  "name": "store-api",
+  "version": "1.0.38",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "bun run --hot src/index.ts"
+  },
+  "dependencies": {
+    "@elysiajs/bearer": "^0.8.0",
+    "@elysiajs/cookie": "^0.5.0",
+    "@elysiajs/jwt": "^0.5.0",
+    "@elysiajs/swagger": "^0.5.0",
+    "@prisma/client": "^4.15.0",
+    "bcrypt": "^5.1.1",
+    "elysia": "latest"
+  },
+  "devDependencies": {
+    "bun-types": "latest",
+    "prisma": "^4.15.0"
+  },
+  "module": "src/index.js"
+}

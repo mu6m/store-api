@@ -1,0 +1,96 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model category {
+  id       String    @id @default(cuid())
+  slug     String
+  name     String
+  products product[]
+
+  @@unique([name])
+}
+
+model product {
+  id          String   @id @default(cuid())
+  slug        String
+  name        String
+  description String   @db.Text
+  highlight   String   @db.Text
+  media       String[]
+  reviews     review[]
+  createdAt   DateTime @default(now())
+  price       Float
+  sale        Float?
+  items       String[]
+  remaining   Int      @default(-1)
+
+  categoriesID String
+  categories   category @relation(fields: [categoriesID], references: [id])
+  orders       order[]
+  cart         cart[]
+
+  @@unique([name, categoriesID])
+  @@index([categoriesID])
+}
+
+model order {
+  id        String   @id @default(cuid())
+  productID String
+  product   product  @relation(fields: [productID], references: [id])
+  userID    String
+  user      user     @relation(fields: [userID], references: [id])
+  createdAt DateTime @default(now())
+
+  @@unique([userID, productID])
+  @@index([userID])
+  @@index([productID])
+}
+
+model user {
+  id       String  @id @default(cuid())
+  username String  @unique
+  name     String
+  email    String  @unique
+  password String
+  location String?
+
+  cart    cart[]
+  orders  order[]
+  reviews review[]
+}
+
+model review {
+  id    String @id @default(cuid())
+  stars Int
+  text  String @db.Text
+
+  likes Int @default(0)
+
+  product   product @relation(fields: [productID], references: [id])
+  productID String
+  user      user    @relation(fields: [userID], references: [id])
+  userID    String
+
+  @@unique([userID, productID, text])
+  @@index([userID])
+  @@index([productID])
+}
+
+model cart {
+  id        String  @id @default(cuid())
+  productID String
+  product   product @relation(fields: [productID], references: [id])
+  userID    String
+  user      user    @relation(fields: [userID], references: [id])
+  many      Int     @default(1)
+
+  @@unique([userID, productID])
+  @@index([userID])
+  @@index([productID])
+}

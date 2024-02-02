@@ -1,0 +1,26 @@
+{
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"[sass]": {
+		"editor.defaultFormatter": null,
+		"editor.formatOnSave": true
+	},
+	"[prisma]": {
+		"editor.defaultFormatter": "Prisma.prisma",
+		"editor.formatOnSave": true
+	},
+	"editor.formatOnSave": true,
+	"prettier.useTabs": true,
+	"prettier.proseWrap": "never",
+	"prettier.printWidth": 80,
+	"editor.codeActionsOnSave": {
+		"source.fixAll.stylelint": "explicit"
+	},
+	"[typescriptreact]": {
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[typescript]": {
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	}
+}
